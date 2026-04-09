@@ -161,9 +161,10 @@ def module_tools_from_file(path: str) -> list[dict[str, Any]]:
     return tools
 
 
-def build_tools_from_files(file_path: str='') -> list[dict[str, Any]]:
-    if not file_path:
-        file_path = read_tools_path()
+def build_tools_from_files() -> list[dict[str, Any]]:
+    file_path = read_tools_path()
+    if file_path is None:
+        raise RuntimeError('User tools not initialized')
     tools_dir = Path(__file__).parent.parent / file_path
     tool_files = [str(p) for p in tools_dir.glob("*.py") if p.name != "__init__.py"]
     

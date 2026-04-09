@@ -68,7 +68,7 @@ def is_valid_tool_function(func: Callable[..., Any], module_name: str) -> bool:
     return metadata is not None
 
 
-def discover_tools(file_path: str='') -> dict[str, Callable[..., Any]]:
+def discover_tools() -> dict[str, Callable[..., Any]]:
     """
     Discover all valid tool functions in the tools directory.
 
@@ -78,8 +78,9 @@ def discover_tools(file_path: str='') -> dict[str, Callable[..., Any]]:
             ...
         }
     """
-    if not file_path:
-        file_path = read_tools_path()
+    file_path = read_tools_path()
+    if file_path is None:
+        raise RuntimeError('User tools not initialized')
     tools_dir = Path(__file__).resolve().parent.parent / file_path
 
     discovered_tools: dict[str, Callable[..., Any]] = {}
