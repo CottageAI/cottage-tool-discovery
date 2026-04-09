@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cottage-tool-discovery"
+version = "0.1.0"
+description = "Tool discovery tools"
+authors = [
+    { name = "Karen Fisher" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "platformdirs>=4.0"
+]
+
+[project.scripts]
+cottage-init-tools = "cottage_tool_discovery.init_tools:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
